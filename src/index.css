@@ -1,0 +1,560 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Clean base styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Text shadow utility */
+.text-shadow {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Otimizações de performance */
+img {
+  max-width: 100%;
+  height: auto;
+  will-change: auto;
+  transform: translateZ(0);
+  display: block;
+}
+
+/* Garantir que imagens de perfil apareçam no mobile */
+.testimonial-image {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  display: block !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+}
+
+/* Otimizações específicas para mobile */
+@media (max-width: 768px) {
+  /* Reduzir animações para melhor performance */
+  .animate-pulse {
+    animation-duration: 3s;
+  }
+  
+  .hover-lift:hover {
+    transform: none;
+  }
+  
+  /* Otimizar imagens para mobile */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+  }
+  
+  /* Reduzir sombras complexas */
+  .shadow-2xl {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .shadow-xl {
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Simplificar gradientes */
+  .bg-gradient-to-r {
+    background: linear-gradient(90deg, var(--tw-gradient-from), var(--tw-gradient-to));
+  }
+  
+  .bg-gradient-to-b {
+    background: linear-gradient(180deg, var(--tw-gradient-from), var(--tw-gradient-to));
+  }
+  
+  /* Otimizar transições */
+  .transition-all {
+    transition-duration: 0.2s;
+  }
+  
+  /* Reduzir blur effects */
+  .backdrop-blur-sm {
+    backdrop-filter: none;
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+  
+  /* Otimizar carrossel */
+  .carousel-container {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+  
+  /* Lazy loading otimizado */
+  img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  img[loading="lazy"].loaded {
+    opacity: 1;
+  }
+  
+  /* Otimizar scroll */
+  .scroll-reveal {
+    will-change: transform, opacity;
+  }
+  
+  /* Reduzir complexidade visual em telas pequenas */
+  .border-4 {
+    border-width: 2px;
+  }
+  
+  .rounded-2xl {
+    border-radius: 0.75rem;
+  }
+  
+  /* Otimizar fontes */
+  body {
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+  
+  /* Reduzir reflows */
+  .testimonial-card {
+    contain: layout style paint;
+  }
+  
+  .gallery-item {
+    contain: layout style paint;
+  }
+  
+  /* Otimizar animações de entrada */
+  .animate-fade-in {
+    animation-duration: 0.4s;
+    animation-fill-mode: both;
+  }
+  
+  /* Melhorar performance do carrossel */
+  .carousel-slide {
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+}
+
+/* Animações otimizadas */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40%, 43% {
+    transform: translateY(-10px);
+  }
+  70% {
+    transform: translateY(-5px);
+  }
+  90% {
+    transform: translateY(-2px);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-reveal.animate-fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Otimizações para conversão */
+.cta-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+}
+
+/* Efeito de urgência */
+.urgency-blink {
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.7; }
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Lazy loading improvements */
+.lazy-load {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lazy-load.loaded {
+  opacity: 1;
+}
+
+/* Reduce motion for accessibility and performance */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Otimizações para performance */
+.gallery-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+  will-change: transform, opacity;
+}
+
+.gallery-item.animate-fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.knowledge-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+  will-change: transform, opacity;
+}
+
+.knowledge-item.animate-fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.science-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+  will-change: transform, opacity;
+}
+
+.science-item.animate-fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Estilos para modal otimizado */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: white;
+  border-radius: 1rem;
+  max-width: 28rem;
+  width: 100%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.3s ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Estilos para vídeo responsivo */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.video-container iframe,
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Preload de fontes críticas */
+@font-face {
+  font-family: 'Inter';
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  font-display: swap;
+}
+
+/* Reduzir movimento para acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .animate-fade-in,
+  .scroll-reveal,
+  .gallery-item,
+  .knowledge-item,
+  .science-item {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Estilos para impressão */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Otimizações específicas para conversão */
+.conversion-optimized {
+  font-weight: 600;
+  color: #dc2626;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.price-highlight {
+  background: linear-gradient(45deg, #fbbf24, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 900;
+}
+
+.urgency-timer {
+  background: linear-gradient(45deg, #dc2626, #991b1b);
+  color: white;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  font-weight: bold;
+  box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+}
+
+/* Efeitos hover otimizados */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Gradientes otimizados */
+.gradient-red {
+  background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+}
+
+.gradient-green {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.gradient-blue {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+/* Sombras otimizadas */
+.shadow-intense {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-glow {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Otimizações para conexões lentas */
+@media (max-width: 768px) and (max-resolution: 150dpi) {
+  /* Reduzir qualidade de imagens em telas de baixa resolução */
+  img {
+    image-rendering: auto;
+    image-rendering: crisp-edges;
+  }
+  
+  /* Simplificar gradientes */
+  .gradient-red,
+  .gradient-green,
+  .gradient-blue {
+    background: solid;
+  }
+  
+  /* Reduzir animações */
+  .animate-pulse {
+    animation: none;
+  }
+  
+  .hover-lift:hover {
+    transform: none;
+  }
+}
+
+/* Otimizações para 3G/4G */
+@media (max-width: 768px) {
+  /* Lazy loading otimizado */
+  img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  img[loading="lazy"].loaded {
+    opacity: 1;
+  }
+  
+  /* Reduzir blur effects */
+  .backdrop-blur-sm {
+    backdrop-filter: none;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Simplificar bordas */
+  .border-4 {
+    border-width: 2px;
+  }
+  
+  .rounded-2xl {
+    border-radius: 0.75rem;
+  }
+}
+
+/* Otimizações para público mais velho */
+@media (max-width: 768px) {
+  /* Aumentar contraste */
+  .text-gray-600 {
+    color: #374151;
+  }
+  
+  .text-gray-700 {
+    color: #1f2937;
+  }
+  
+  /* Aumentar espaçamento entre elementos clicáveis */
+  button + button,
+  a + a {
+    margin-top: 0.75rem;
+  }
+  
+  /* Melhorar legibilidade de preços */
+  .price-highlight {
+    font-weight: 900;
+    color: #dc2626;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Destacar CTAs */
+  .cta-button {
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    font-weight: 900;
+  }
+}
