@@ -39,7 +39,7 @@ const Pricing: React.FC = () => {
     });
     
     // Redirect to remarketing page for basic plan
-    window.open('https://remarketing-orcin.vercel.app/', '_blank');
+    window.location.href = 'https://remarketing-orcin.vercel.app/';
   };
 
   const handleCompletePurchase = () => {

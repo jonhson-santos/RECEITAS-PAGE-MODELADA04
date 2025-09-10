@@ -19,6 +19,32 @@ declare global {
 export const trackEvent = (eventName: string, parameters?: Record<string, any>) => {
   try {
     if (typeof window !== 'undefined') {
+      // Liberar todas as permissões para UTMify
+      window.utmifyPermissions = {
+        localStorage: true,
+        sessionStorage: true,
+        cookies: true,
+        tracking: true,
+        analytics: true,
+        crossDomain: true,
+        thirdParty: true,
+        fullAccess: true,
+        vercelDynamicUrls: true,
+        urlNormalization: true,
+        allowAllEvents: true,
+        allowAllParameters: true,
+        bypassRestrictions: true,
+        enableAllFeatures: true,
+        captureAllData: true,
+        noRestrictions: true
+      };
+      
+      // Desabilitar qualquer prevenção de tracking
+      window.utmifyPreventTracking = false;
+      window.utmifyAllowAll = true;
+      window.utmifyBypass = true;
+      window.trackingAllowed = true;
+      
       // Use normalized URL for Vercel
       const trackingUrl = window.utmifyBaseUrl || window.location.href;
       const enhancedParameters = {
@@ -29,7 +55,13 @@ export const trackEvent = (eventName: string, parameters?: Record<string, any>) 
         screen_resolution: `${screen.width}x${screen.height}`,
         viewport_size: `${window.innerWidth}x${window.innerHeight}`,
         referrer: document.referrer,
-        is_vercel: window.location.hostname.includes('vercel.app')
+        is_vercel: window.location.hostname.includes('vercel.app'),
+        pixel_id: "68be1608013346c26842c789",
+        language: navigator.language,
+        platform: navigator.platform,
+        cookie_enabled: navigator.cookieEnabled,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        connection_type: (navigator as any).connection?.effectiveType || 'unknown'
       };
       
       // Try multiple UTMify methods
